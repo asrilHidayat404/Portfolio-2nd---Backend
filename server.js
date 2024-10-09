@@ -4,6 +4,9 @@ import bodyParser from "body-parser"
 import db from "./db-connection/connection.js"
 import SignIn from "./signIn/index.js";
 import Login from "./login/index.js";
+import dotenv from "dotenv"
+
+dotenv.config();
 
 
 const app = express()
@@ -11,7 +14,7 @@ const app = express()
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:5173",
+    // origin: "http://localhost:8000",
   })
 );
 

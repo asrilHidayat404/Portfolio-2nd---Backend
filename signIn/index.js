@@ -5,7 +5,7 @@ const SignIn = async (req, res) => {
   const { username, password } = req.body;
   const hashPswd = await hashPwd(password)
   
-  const sql = `insert into user (username, password)
+  const sql = `insert into users (username, password)
                 values
               (?, ?)`
 
@@ -15,7 +15,8 @@ const SignIn = async (req, res) => {
   // Kirim respons ke klien
   res.status(200).json(
     { 
-      message: "Data received successfully",
+      status: true,
+      message: "Account created",
       data: {
         username,
         password,

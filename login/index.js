@@ -1,33 +1,11 @@
-// import cleanRowDataPacket from "../cleanRDP/index.js"
-// import db from "../db-connection/connection.js"
-// import bcrypt from "bcrypt"
-
-// const Login = (req, res) => {
-//     const { username, password } = req.body
-//     console.log(username, password)
-//     const sql = "select * from user where username = ? and password = ?"
-//     db.query(sql, [username, password], async (err, result) => {
-//       const data = await cleanRowDataPacket(result)
-//       const compareResults = result.map(row => {
-//         return {
-//           username: row.username,
-//           isPasswordMatch: bcrypt.compareSync(password, row.password)
-
-//         };
-//       });
-//         return res.status("Hasil: " + JSON.stringify(compareResults))
-//     })
-// }
-
-// export default Login
-
+import { use } from "bcrypt/promises.js";
 import cleanRowDataPacket from "../cleanRDP/index.js";
 import db from "../db-connection/connection.js";
 import bcrypt from "bcrypt";
 
 const Login = (req, res) => {
     const { username, password } = req.body;
-    const sql = "SELECT * FROM user WHERE username = ?";
+    const sql = "SELECT * FROM users WHERE username = ?";
     
     db.query(sql, [username], (err, result) => {
         if (err) {
@@ -44,9 +22,12 @@ const Login = (req, res) => {
                 }
             );
         }
-
-        const user = result[0];
-        const isPasswordMatch = bcrypt.compareSync(password, user.password);
+        // ambil semua hasil query
+        const user = result;
+        // bandingkan semua password dengan input password
+        const userPassword = user.map(user => bcrypt.compareSync(password, user.password));
+        // pilih password yang cocok/true
+        const isPasswordMatch = userPassword.find(userPassword => userPassword)
 
         if (isPasswordMatch) {
             const cleanedData = cleanRowDataPacket(user);
