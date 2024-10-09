@@ -11,7 +11,7 @@ const app = express()
 app.use(
   cors({
     credentials: true,
-    origin: "https://portfolio-2nd-ruddy.vercel.app",
+    origin: "https://portfolio-2nd-lilac.vercel.app",
   })
 );
 app.get("/", (req, res) => res.send("hello"))
