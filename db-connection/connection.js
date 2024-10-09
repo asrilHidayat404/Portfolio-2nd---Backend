@@ -1,10 +1,11 @@
 import mysql from "mysql"
-
+import dotenv from "dotenv"
+dotenv.config();
 const db = mysql.createConnection({
-    host: 'sql12.freemysqlhosting.net',
-    user: 'sql12736476',
-    password: '1ydvNYs33K',
-    database: 'sql12736476'
+    host: process.env.DB_SERVER,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 })
 
 db.connect( (err) => {

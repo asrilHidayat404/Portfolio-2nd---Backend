@@ -1,12 +1,9 @@
 import express from "express";
 import cors from "cors"
 import bodyParser from "body-parser"
-import db from "./db-connection/connection.js"
 import SignIn from "./signIn/index.js";
 import Login from "./login/index.js";
-import dotenv from "dotenv"
 
-dotenv.config();
 
 
 const app = express()
@@ -14,7 +11,7 @@ const app = express()
 app.use(
   cors({
     credentials: true,
-    // origin: "http://localhost:8000",
+    origin: "http://localhost:8000",
   })
 );
 app.get("/", (req, res) => res.send("hello"))
