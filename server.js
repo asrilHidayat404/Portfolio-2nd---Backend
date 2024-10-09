@@ -17,7 +17,7 @@ app.use(
     // origin: "http://localhost:8000",
   })
 );
-
+app.get("/", (req, res) => res.send("hello"))
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(bodyParser.json())
 
